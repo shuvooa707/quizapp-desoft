@@ -11,45 +11,8 @@ const QuizCreationForm = () => {
     const {auth} = useSelector(state => state.auth);
 
     const [quizTitle, setQuizTitle] = useState('');
-    const [quizDescription, setQuizDescription] = useState('');
-    const [questions, setQuestions] = useState([{question: '', options: ['', ''], correctOption: null}]);
 
-    const handleAddQuestion = () => {
-        setQuestions([...questions, {question: '', options: ['', ''], correctOption: null}]);
-    };
 
-    const handleQuestionChange = (index, value) => {
-        const newQuestions = [...questions];
-        newQuestions[index].question = value;
-        setQuestions(newQuestions);
-    };
-
-    const handleOptionChange = (qIndex, oIndex, value) => {
-        const newQuestions = [...questions];
-        newQuestions[qIndex].options[oIndex] = value;
-        setQuestions(newQuestions);
-    };
-
-    const handleAddOption = (qIndex) => {
-        const newQuestions = [...questions];
-        newQuestions[qIndex].options.push('');
-        setQuestions(newQuestions);
-    };
-
-    const handleRemoveOption = (qIndex, oIndex) => {
-        const newQuestions = [...questions];
-        newQuestions[qIndex].options.splice(oIndex, 1);
-        setQuestions(newQuestions);
-    };
-
-    const handleCorrectOptionChange = (qIndex, oIndex) => {
-        const newQuestions = [...questions];
-        newQuestions[qIndex].correctOption = oIndex;
-        setQuestions(newQuestions);
-    };
-
-    const [topics, setTopics] = useState([]);
-    const [quizCategory, setQuizCategory] = useState('');
 
     const loadCreatePageData = async () => {
         let res = await axios.get(`${serverUrl}/api/admin/quizzes/create/init`, {
@@ -68,8 +31,8 @@ const QuizCreationForm = () => {
 
     const handleSubmit = async e => {
         e.preventDefault();
-        let res = await axios.post(`${serverUrl}/api/admin/topics/store`, {
-            title: quizTitle
+        let res = await axios.post(`${serverUrl}/api/admin/topics/create`, {
+            name: quizTitle
         }, {
             headers: {
                 "Content-Type": "application/json",
@@ -78,21 +41,20 @@ const QuizCreationForm = () => {
             }
         });
 
-        console.log({quizTitle, quizDescription, questions});
         if (res.data.message === "success") {
             Swal.fire({
                 title: "Successful",
-                text: "Quiz Created Successfully",
+                text: "Topic Created Successfully",
                 icon: "success"
             });
-            navigate("/admin/quizzes");
+            navigate("/admin/topics");
         }
         // Add your form submission logic here
     };
 
 
     useEffect(() => {
-        loadCreatePageData();
+        // loadCreatePageData();
     },[])
 
     return (

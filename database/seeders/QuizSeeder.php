@@ -24,11 +24,7 @@ class QuizSeeder extends Seeder
 
         for ($i = 0; $i <= 100; $i++) {
 
-            $quizData = [
-                "title" => fake()->sentence,
-                "description" => fake()->realText
-            ];
-            $quiz = $quizService->createQuiz($quizData, rand(1,10), rand(1, 10));
+            $quiz = $quizService->createQuiz(fake()->sentence,fake()->realText, rand(1,10), rand(1, 10));
 
             for ($j = 0; $j < rand(5, 50); $j++) {
                 $questionData = [

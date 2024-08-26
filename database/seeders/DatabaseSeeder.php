@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Topic;
 use App\Models\User;
 use App\Services\UserService;
 use Illuminate\Database\Seeder;
@@ -19,7 +20,9 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             UserSeeder::class,
-            QuizSeeder::class
+            TopicSeeder::class,
+            QuizSeeder::class,
+
         ]);
     }
 }

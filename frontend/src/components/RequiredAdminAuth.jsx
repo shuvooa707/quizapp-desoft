@@ -25,6 +25,8 @@ const RequiredAuth = ({children}) => {
         }
 
         if ( auth && auth.profile.role !== "admin" ) {
+            dispatch(setAuth(null));
+            LocalStorageService.remove("desoft_auth")
             navigate('/admin/login');
         }
 

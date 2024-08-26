@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreTopicRequest;
 use App\Http\Requests\UpdateTopicRequest;
 use App\Models\Topic;
+use http\Env\Request;
 
 class TopicController extends Controller
 {
@@ -32,9 +33,15 @@ class TopicController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreTopicRequest $request)
+    public function store(\Illuminate\Http\Request $request)
     {
-        //
+        Topic::create([
+            "name" => $request->get("name"),
+        ]);
+
+        return response([
+            "message" => "success",
+        ]);
     }
 
     /**

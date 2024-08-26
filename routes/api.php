@@ -52,8 +52,9 @@ Route::middleware('auth:sanctum')->group(function () {
 
 
 
-        /*** Answers Routes ***/
+        /*** Topics Routes ***/
         Route::get("/topics", [TopicController::class, 'index']);
+        Route::post("/topics/create", [TopicController::class, 'store']);
 
         /*** Quiz Routes ***/
         Route::get("/quizzes", [QuizController::class, 'index']);
